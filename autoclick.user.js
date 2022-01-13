@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SandBox 抢地时自动点击购买按钮，请配合咱们的定制小狐狸钱包使用
 // @namespace    https://github.com/zhangshengjie/TheSandBox_autoClick
-// @version      0.1
+// @version      0.2
 // @description  自动点击sandbox购买按钮
 // @author       cejay
 // @match        https://www.sandbox.game/*
@@ -36,6 +36,10 @@ function showStatus(str){
                 if(navbar && navbar.length>0){
                     navbar[0].appendChild(infoNodeDom);
                     infoNode = document.getElementById('__infonode__');
+
+                    infoNode.style.height = "100%";
+                    infoNode.style.alignItems = "center";
+                    infoNode.style.display = "flex";
                 }
             }
         }
@@ -66,6 +70,14 @@ function run() {
                         if(currentBtnClickTimes % 2 === 0){
                             //第一次点击或者后续需要点击,此处目的是希望每次按钮刚刚出现时点击速度要足够快，但是同一个按钮不变化是稍微降低下点击频率（50%）
                             clickCount++;
+                            if( clickCount % 2 == 0 )
+                            {
+                                infoNode.style.backgroundColor = "";
+                            }
+                            else
+                            {
+                                infoNode.style.backgroundColor = "#666666";
+                            }
                             btn.click();
                             showStatus('已经累计自动点击了 '+clickCount+' 次');
                             //console.log('真正点击');
